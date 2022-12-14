@@ -25,9 +25,11 @@ train_set, rem_set = image_dataset_from_directory(
     crop_to_aspect_ratio=False,
 )
 
-val_set, test_set = split_dataset(rem_set, left_size=0.8)
+val_set, test_set = split_dataset(rem_set, left_size=0.5)
 
 model = load_model("model_with_aug2.h5")
+#model = load_model("model_without training.h5")
+print(model.summary())
 y_predict = np.argmax(model.predict(test_set), axis=1)
 y_test = np.argmax(np.concatenate([y for x, y in test_set], axis=0), axis=1)
 
