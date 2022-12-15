@@ -1,12 +1,9 @@
 from keras.layers import Dense, Flatten
 from keras.applications.inception_v3 import InceptionV3
 from keras.utils import image_dataset_from_directory, split_dataset
-from keras.models import Model, load_model
+from keras.models import Model
 from glob import glob
 import matplotlib.pyplot as plt
-import numpy as np
-from sklearn.metrics import confusion_matrix
-import seaborn as sns
 
 IMAGE_SIZE = [224, 224]
 
@@ -28,7 +25,7 @@ train_set, rem_set = image_dataset_from_directory(
     crop_to_aspect_ratio=False,
 )
 
-val_set, test_set = split_dataset(rem_set, left_size=0.8)
+val_set, test_set = split_dataset(rem_set, left_size=0.5)
 
 inception = InceptionV3(input_shape=IMAGE_SIZE + [3], weights='imagenet', include_top=False)
 
